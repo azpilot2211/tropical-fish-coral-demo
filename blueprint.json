@@ -1,0 +1,65 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"landingPage": "/",
+	"preferredVersions": {
+		"php": "8.2",
+		"wp": "latest"
+	},
+	"features": {
+		"networking": true
+	},
+	"steps": [
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "wordpress.org/plugins",
+				"slug": "woocommerce"
+			}
+		},
+		{
+			"step": "installTheme",
+			"themeData": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/azpilot2211/tropical-fish-coral-demo/main/tropical-fish-coral.zip"
+			},
+			"options": {
+				"activate": true
+			}
+		},
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/azpilot2211/tropical-fish-coral-demo/main/tfc-supplier-import.zip"
+			}
+		},
+		{
+			"step": "writeFile",
+			"path": "/wordpress/wp-content/mu-plugins/tfc-demo.php",
+			"data": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/azpilot2211/tropical-fish-coral-demo/main/tfc-demo.php"
+			}
+		},
+		{
+			"step": "writeFile",
+			"path": "/wordpress/demo-products.json",
+			"data": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/azpilot2211/tropical-fish-coral-demo/main/demo-products.json"
+			}
+		},
+		{
+			"step": "writeFile",
+			"path": "/wordpress/demo-setup.php",
+			"data": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/azpilot2211/tropical-fish-coral-demo/main/demo-setup.php"
+			}
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php require '/wordpress/demo-setup.php';"
+		}
+	]
+}
